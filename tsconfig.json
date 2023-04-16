@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "commonjs",
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"strict": true,
+		"moduleResolution": "node",
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "removeComments": true,
+		"esModuleInterop": true,
+		"sourceMap": false,
+		"forceConsistentCasingInFileNames": true,
+		"useUnknownInCatchVariables": false
+	},
+	"include": ["./**/*.ts"],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
