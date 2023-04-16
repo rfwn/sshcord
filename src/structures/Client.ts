@@ -28,7 +28,7 @@ class Valence extends Client {
     public contexts: Map<string, Command>;
     public readonly logger: typeof Logger;
     public readonly webhookManager: WebhookService;
-    public database: any;
+    public database: Promise<void | Connection>;
     constructor() {
         super({
             partials: [
@@ -77,7 +77,6 @@ class Valence extends Client {
         });
         this.config = config;
         this.logger = Logger;
-        this.database = null;
         this.webhookManager = new WebhookService(this);
         this.events = new Map();
         this.eventRegistry = new EventRegistry(this);
@@ -85,11 +84,14 @@ class Valence extends Client {
         this.commandRegistry = new CommandRegistry(this);
         this.contexts = new Map();
         this.contextRegistry = new ContextMenuRegistry(this);
-        this.eventRegistry.loadEvents().then(() => {
-            this.commandRegistry.loadCommands().then(() => {
-                this.contextRegistry.loadContexts();
+        this.database = Database(this).then(() => {
+            this.eventRegistry.loadEvents().then(() => {
+                this.commandRegistry.loadCommands().then(() => {
+                    this.contextRegistry.loadContexts();
+                });
             });
-        });
+        })
+
     }
 }
 
