@@ -6,5 +6,7 @@ export default {
     clientId: process.env.client_id,
     ownerId: process.env.owner_id,
     serverId: process.env.server_id,
+    dbUser: process.env.db_username,
+    dbPassword: process.env.db_password,
     debug: true,
 };

@@ -7,6 +7,8 @@ import Event from './Event';
 import Command from './Command';
 import CommandRegistry from '../registry/CommandRegistry';
 import ContextMenuRegistry from '../registry/ContextMenuRegistry';
+import Connection from 'mysql2/typings/mysql/lib/Connection';
+import Database from '../utils/Database';
 
 class Valence extends Client {
     public readonly config: {
@@ -14,6 +16,8 @@ class Valence extends Client {
         clientId: string | undefined;
         ownerId: string | undefined;
         serverId: string | undefined;
+        dbUser: string | undefined;
+        dbPassword: string | undefined;
         debug: boolean;
     };
     public readonly eventRegistry: EventRegistry;
@@ -24,6 +28,7 @@ class Valence extends Client {
     public contexts: Map<string, Command>;
     public readonly logger: typeof Logger;
     public readonly webhookManager: WebhookService;
+    public database: any;
     constructor() {
         super({
             partials: [
@@ -72,6 +77,7 @@ class Valence extends Client {
         });
         this.config = config;
         this.logger = Logger;
+        this.database = null;
         this.webhookManager = new WebhookService(this);
         this.events = new Map();
         this.eventRegistry = new EventRegistry(this);

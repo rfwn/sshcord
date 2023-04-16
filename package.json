@@ -25,6 +25,7 @@
   "homepage": "https://github.com/rfwn/haroldTheRipper#readme",
   "dependencies": {
     "discord.js": "^14.9.0",
+    "mysql2": "^3.2.3",
     "tslog": "^4.8.2"
   },
   "devDependencies": {
